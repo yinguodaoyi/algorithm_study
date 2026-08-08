@@ -1,0 +1,35 @@
+//Recursive.Step by step, we gradually arrive at the conclusion.
+#include<iostream>
+using namespace std;
+int a,b,n,m;
+bool ma[23][23];
+long long x[23][23];
+void work(int x,int y){
+	ma[x][y]=true;
+	ma[x-1][y-2]=true;
+	ma[x-2][y-1]=true;
+	ma[x-2][y+1]=true;
+	ma[x-1][y+2]=true;
+	ma[x+1][y-2]=true;
+	ma[x+2][y-1]=true;
+	ma[x+2][y+1]=true;
+	ma[x+1][y+2]=true;
+}
+int main(){
+	cin>>n>>m>>a>>b;
+	a+=2;
+	b+=2;
+	n+=2;
+	m+=2;
+	work(a,b);
+	x[2][2]=1;
+	for(int i=2;i<=n;i++){
+		for(int j=2;j<=m;j++){
+			if(i==2&&j==2)continue;
+			if(!ma[i][j])x[i][j]=x[i-1][j]+x[i][j-1];
+		}
+	}
+	cout<<x[n][m];
+	return 0;
+}
+
